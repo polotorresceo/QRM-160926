@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biotecnología Cuántica · Regeneración Celular · Alexa Torres · Angelópolis Puebla</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Quantum Biotech palette — deep space blue-black, neon cyan, quantum turquoise, electric blue, gold/green neon flashes */
+  --bg:#03060f;--bg2:#060e22;--bg3:#0a1836;
+  --gold:#00fff2;--gold2:#66fcff;--gold3:#d8feff;      /* neon cyan (mapped onto legacy "gold" vars) */
+  --green:#00e5a0;--green2:#39ffb0;--green3:#b8ffe4;   /* quantum turquoise / neon green */
+  --teal:#2f7cff;                                       /* electric blue */
+  --amber:#ffd700;--amber2:#ffe873;                     /* gold neon accents */
+  --text:#eafcff;--muted:rgba(216,250,255,0.62);
+  --border:rgba(0,255,242,0.24);
+  --atom:#7c4dff;
+  --glass:rgba(10,24,54,0.45);
+}
+@keyframes bgshift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+.glass{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.neon-border{border:1px solid rgba(0,255,242,0.35);box-shadow:0 0 18px rgba(0,255,242,0.15),inset 0 0 18px rgba(0,255,242,0.04)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:
+    radial-gradient(ellipse 900px 600px at 10% -10%,rgba(0,255,242,.08),transparent 60%),
+    radial-gradient(ellipse 900px 700px at 110% 10%,rgba(124,77,255,.10),transparent 55%),
+    radial-gradient(ellipse 800px 600px at 50% 120%,rgba(0,229,160,.08),transparent 55%),
+    var(--bg);
+  color:var(--text);overflow-x:hidden;line-height:1.65}
+
+/* subtle quantum grid overlay */
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(rgba(0,255,242,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,242,.05) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 0%,transparent 75%)}
+
+.particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;border-radius:50%;animation:pfloat linear infinite;opacity:0}
+@keyframes pfloat{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.8}90%{opacity:.2}100%{transform:translateY(-60px);opacity:0}}
+
+section{position:relative;z-index:1}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:60px 20px 80px;
+  background:
+    radial-gradient(ellipse at 70% 40%,rgba(34,197,94,.10) 0%,transparent 55%),
+    radial-gradient(ellipse at 15% 80%,rgba(240,192,64,.08) 0%,transparent 50%);
+}
+.hero-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media(max-width:768px){.hero-inner{grid-template-columns:1fr;gap:36px;text-align:center}.book-col{order:-1}}
+
+.book-col{display:flex;justify-content:center;position:relative}
+.book-img{width:255px;border-radius:4px 12px 12px 4px;
+  filter:drop-shadow(-8px 16px 40px rgba(0,0,0,.7)) drop-shadow(0 0 36px rgba(34,197,94,.3));
+  animation:bfloat 4.5s ease-in-out infinite}
+@keyframes bfloat{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-14px) rotate(1deg)}}
+.book-glow{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);
+  width:180px;height:22px;
+  background:radial-gradient(ellipse,rgba(34,197,94,.4),transparent 70%);
+  filter:blur(8px);animation:gp 4.5s ease-in-out infinite}
+@keyframes gp{0%,100%{opacity:.5}50%{opacity:1}}
+.float-badge{position:absolute;top:-8px;right:-8px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));color:#061a0e;
+  font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:7px 13px;border-radius:20px;text-align:center;line-height:1.4;
+  box-shadow:0 4px 18px rgba(240,192,64,.45);animation:bf 3.5s ease-in-out infinite}
+@keyframes bf{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* atom orbits deco */
+.atom-wrap{position:absolute;bottom:-20px;left:-20px;width:90px;height:90px;opacity:.25}
+.orbit{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--atom)}
+.orbit:nth-child(2){transform:rotate(60deg)}
+.orbit:nth-child(3){transform:rotate(120deg)}
+.nucleus{position:absolute;inset:38%;border-radius:50%;background:var(--atom)}
+
+.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.eyebrow::before,.eyebrow::after{content:'';flex:0 0 22px;height:1px;background:var(--gold);opacity:.6}
+@media(max-width:768px){.eyebrow{justify-content:center}}
+
+h1{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,62px);line-height:1.05;font-weight:700;color:#fff;margin-bottom:18px}
+h1 span{color:var(--gold2)}
+h1 em{color:var(--green2);font-style:normal}
+
+.promo-banner{
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(240,192,64,.1);border:1.5px solid rgba(240,192,64,.4);
+  border-radius:10px;padding:12px 20px;margin-bottom:18px;
+}
+.promo-banner .pb{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold2)}
+.promo-banner .pt{font-size:12px;color:var(--muted)}
+@media(max-width:768px){.promo-banner{justify-content:center}}
+
+.alexa-card{display:flex;align-items:center;gap:14px;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:22px;box-shadow:0 0 24px rgba(0,255,242,.08)}
+.aav{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#061a0e;flex-shrink:0}
+.aai p{margin:0;font-size:13px}
+.aan{font-family:'Playfair Display',serif;font-size:15px;color:#fff;font-weight:600}
+.aac{color:var(--muted)}
+
+.hero-sub{font-size:clamp(14px,1.8vw,16px);color:var(--muted);font-weight:300;max-width:480px;margin-bottom:26px;line-height:1.75}
+@media(max-width:768px){.hero-sub{max-width:100%}}
+
+.btn-grp{display:flex;flex-wrap:wrap;gap:12px}
+@media(max-width:768px){.btn-grp{justify-content:center}}
+
+.btn-gold{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#03060f;padding:13px 22px;border-radius:8px;font-weight:700;font-size:13px;letter-spacing:.05em;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 0 22px rgba(0,255,242,.45),0 6px 28px rgba(0,255,242,.25)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(0,255,242,.65),0 10px 36px rgba(0,255,242,.35)}
+.btn-green{display:inline-flex;align-items:center;gap:9px;background:#25d366;color:#fff;padding:13px 22px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;transition:opacity .2s,transform .2s;box-shadow:0 0 20px rgba(37,211,102,.45),0 4px 18px rgba(37,211,102,.35)}
+.btn-green:hover{opacity:.88;transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:9px;background:rgba(0,229,160,.1);border:1.5px solid rgba(0,229,160,.4);color:var(--green2);padding:13px 20px;border-radius:8px;font-weight:500;font-size:13px;text-decoration:none;transition:background .2s,transform .2s}
+.btn-outline:hover{background:rgba(34,197,94,.2);transform:translateY(-2px)}
+
+.locations-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+@media(max-width:768px){.locations-strip{justify-content:center}}
+.loc-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:6px 13px;font-size:11px;color:var(--muted)}
+.loc-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+/* ── VIDEO SECTION ── */
+.video-section{padding:70px 20px 90px;background:var(--bg2);position:relative}
+.video-inner{max-width:900px;margin:0 auto;text-align:center}
+.video-inner .section-label{margin-bottom:8px}
+.video-inner h2{margin-bottom:28px}
+.video-frame-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:18px;overflow:hidden;
+  border:1px solid rgba(0,255,242,.35);
+  box-shadow:0 0 50px rgba(0,255,242,.18),0 0 90px rgba(124,77,255,.12),inset 0 0 30px rgba(0,255,242,.05)}
+.video-frame-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-frame-wrap::before{content:'';position:absolute;inset:-1px;z-index:-1;border-radius:18px;
+  background:linear-gradient(135deg,var(--gold),var(--atom),var(--green));opacity:.35;filter:blur(10px)}
+.video-caption{margin-top:16px;font-size:12px;color:var(--muted);letter-spacing:.04em}
+
+/* ── QUANTUM SECTION ── */
+.quantum-section{padding:90px 20px;background:radial-gradient(ellipse at 80% 30%,rgba(34,197,94,.08),transparent 55%),var(--bg2)}
+.section-label{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;text-align:center}
+h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.8vw,42px);text-align:center;color:#fff;margin-bottom:34px;font-weight:700;line-height:1.1}
+h2 span{color:var(--gold2)}
+h2 em{color:var(--green2);font-style:normal}
+
+.symptoms-grid{max-width:980px;margin:0 auto 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.sym-card{background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:12px;padding:18px 16px;display:flex;align-items:flex-start;gap:12px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.sym-card:hover{transform:translateY(-3px);border-color:rgba(0,255,242,.5);box-shadow:0 0 22px rgba(0,255,242,.18)}
+.sym-icon{font-size:24px;flex-shrink:0;line-height:1}
+.sym-card h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.sym-card p{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* scan panel */
+.scan-panel{max-width:780px;margin:0 auto;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(0,255,242,.3);border-radius:16px;padding:36px 32px;text-align:center;box-shadow:0 0 40px rgba(0,255,242,.1),inset 0 0 30px rgba(124,77,255,.06)}
+@media(max-width:600px){.scan-panel{padding:24px 16px}}
+.scan-panel h3{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,30px);color:#fff;margin-bottom:10px}
+.scan-panel p{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7}
+.scan-features{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:28px}
+.sf{background:rgba(0,188,212,.1);border:1px solid rgba(0,188,212,.3);border-radius:20px;padding:7px 16px;font-size:12px;color:#67e8f9;font-weight:500}
+.promo-tag{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#061a0e;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;padding:10px 24px;border-radius:10px;margin-bottom:8px}
+.promo-note{font-size:12px;color:var(--muted);margin-bottom:24px}
+
+/* ── SUPLEMENTOS BIOTECNOLOGÍA ── */
+.supp-section{padding:90px 20px;background:
+    radial-gradient(ellipse at 15% 15%,rgba(124,77,255,.10),transparent 50%),
+    radial-gradient(ellipse at 85% 85%,rgba(0,255,242,.08),transparent 50%),
+    var(--bg3)}
+.supp-inner{max-width:1180px;margin:0 auto}
+.supp-sub{max-width:640px;margin:0 auto 40px;text-align:center;font-size:14px;color:var(--muted);line-height:1.7}
+.supp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px}
+.supp-card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .3s,box-shadow .3s,border-color .3s}
+.supp-card:hover{transform:translateY(-6px);border-color:rgba(0,255,242,.55);box-shadow:0 0 30px rgba(0,255,242,.22),0 0 60px rgba(124,77,255,.12)}
+.supp-img{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(135deg,rgba(0,255,242,.08),rgba(124,77,255,.08))}
+.supp-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.supp-card:hover .supp-img img{transform:scale(1.06)}
+.supp-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(3,6,15,.55),transparent 45%)}
+.supp-body{padding:16px 16px 20px;display:flex;flex-direction:column;flex:1;gap:8px}
+.supp-body h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff}
+.supp-body p{font-size:12px;color:var(--muted);line-height:1.55;flex:1}
+.btn-supp{margin-top:6px;display:flex;align-items:center;justify-content:center;gap:7px;
+  background:rgba(0,229,160,.12);border:1.5px solid rgba(0,229,160,.45);color:var(--green2);
+  padding:10px 14px;border-radius:8px;font-weight:600;font-size:11.5px;letter-spacing:.03em;
+  text-decoration:none;text-align:center;transition:background .2s,transform .2s,box-shadow .2s}
+.btn-supp:hover{background:rgba(0,229,160,.22);transform:translateY(-2px);box-shadow:0 0 18px rgba(0,229,160,.3)}
+@media(max-width:480px){.supp-grid{grid-template-columns:repeat(2,1fr);gap:14px}.supp-body{padding:12px 12px 16px}.supp-body h4{font-size:13.5px}}
+
+/* ── EBOOK SECTION ── */
+.ebook-section{padding:80px 20px;background:var(--bg)}
+.ebook-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center}
+@media(max-width:680px){.ebook-inner{grid-template-columns:1fr;text-align:center}}
+.ebook-cover{display:flex;justify-content:center}
+.ebook-cover img{width:220px;border-radius:4px 12px 12px 4px;filter:drop-shadow(-6px 12px 32px rgba(0,0,0,.6)) drop-shadow(0 0 28px rgba(34,197,94,.25));animation:bfloat 5s ease-in-out infinite}
+.ebook-text h2{text-align:left;margin-bottom:12px}
+@media(max-width:680px){.ebook-text h2{text-align:center}}
+.ebook-text p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:20px}
+.ebook-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.ef{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--muted)}
+.ef-dot{width:18px;height:18px;border-radius:50%;background:rgba(240,192,64,.15);border:1.5px solid var(--gold);flex-shrink:0;margin-top:2px}
+@media(max-width:680px){.ebook-features{align-items:center}.ef{justify-content:center}}
+
+/* ── CHAPTERS ── */
+.chapters-section{padding:80px 20px;background:var(--bg2)}
+.ch-grid{max-width:920px;margin:0 auto;display:flex;flex-direction:column}
+.ch-item{display:grid;grid-template-columns:56px 1fr auto;align-items:start;gap:16px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.05);transition:opacity .2s}
+.ch-item:last-child{border-bottom:none}
+.ch-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:rgba(240,192,64,.15);line-height:1;transition:color .25s;padding-top:3px}
+.ch-item:hover .ch-num{color:rgba(240,192,64,.5)}
+.ch-body h4{font-size:15px;font-weight:600;color:var(--text);margin-bottom:5px}
+.ch-body p{font-size:13px;color:var(--muted);line-height:1.6}
+.ch-tag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);color:var(--gold);padding:4px 10px;border-radius:4px;white-space:nowrap;margin-top:4px}
+@media(max-width:560px){.ch-item{grid-template-columns:44px 1fr}.ch-tag{display:none}}
+
+/* ── FORM SECTION ── */
+.form-section{padding:90px 20px;background:radial-gradient(ellipse at 50% 0%,rgba(34,197,94,.14),transparent 55%),var(--bg3)}
+.form-wrap{max-width:560px;margin:0 auto;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px;padding:44px 36px;position:relative;box-shadow:0 0 40px rgba(0,255,242,.08)}
+@media(max-width:580px){.form-wrap{padding:28px 18px}}
+.form-wrap::before{content:"Descarga tu guía gratuita";position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#061a0e;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:5px 18px;border-radius:20px;white-space:nowrap}
+.form-group{margin-bottom:15px}
+.form-group label{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:7px}
+.form-group input,.form-group select{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(240,192,64,.22);border-radius:10px;padding:13px 15px;color:#fff;font-size:14px;font-family:'Jost',sans-serif;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.form-group input::placeholder{color:rgba(255,255,255,.28)}
+.form-group input:focus,.form-group select:focus{border-color:var(--gold)}
+.form-group select option{background:#0b2615;color:#fff}
+.btn-submit{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#061a0e;padding:14px;border-radius:10px;font-weight:700;font-size:14px;letter-spacing:.06em;border:none;cursor:pointer;margin-top:6px;font-family:'Jost',sans-serif;transition:opacity .2s,transform .2s}
+.btn-submit:hover{opacity:.88;transform:translateY(-2px)}
+.form-note{text-align:center;font-size:11px;color:var(--muted);margin-top:11px}
+.form-ok{display:none;text-align:center;padding:20px 0}
+.form-ok .ck{width:52px;height:52px;border-radius:50%;background:rgba(37,211,102,.12);border:2px solid #22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px}
+.form-ok h4{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold2);margin-bottom:6px}
+.form-ok p{font-size:13px;color:var(--muted)}
+
+/* ── CITA SECTION ── */
+.cita-section{padding:80px 20px;background:var(--bg2);text-align:center}
+.cita-inner{max-width:700px;margin:0 auto}
+.cita-sub{font-size:15px;color:var(--muted);margin-bottom:36px;line-height:1.7}
+.cita-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+@media(max-width:560px){.cita-cards{grid-template-columns:1fr}}
+.cita-card{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:14px;padding:26px 20px;transition:transform .25s,box-shadow .25s}
+.cita-card:hover{transform:translateY(-4px);box-shadow:0 0 26px rgba(0,255,242,.15)}
+.cita-card.featured{border-color:rgba(0,255,242,.5);background:rgba(0,255,242,.05);box-shadow:0 0 30px rgba(0,255,242,.15)}
+.cita-ico{font-size:28px;margin-bottom:10px;display:block}
+.cita-card h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:6px}
+.cita-card p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:18px}
+.wa-btn svg{width:26px;height:26px;fill:#fff}
+.wa-bub{background:var(--bg2);border:1px solid rgba(37,211,102,.3);border-radius:12px 12px 0 12px;padding:6px 12px;font-size:11px;color:#4ade80;font-weight:500;white-space:nowrap;box-shadow:0 3px 12px rgba(0,0,0,.3);animation:bub 3.5s ease-in-out infinite}
+@keyframes bub{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+footer{background:#020d07;padding:32px 20px;text-align:center;border-top:1px solid var(--border)}
+footer p{font-size:12px;color:var(--muted)}
+footer a{color:var(--gold);text-decoration:none}
+footer strong{color:var(--gold2)}
+
+.wa-i{width:16px;height:16px;fill:currentColor;flex-shrink:0}
+.wa-svg path{fill:#fff}
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<!-- WA float -->
+<div class="wa-float">
+  <div class="wa-bub">🔬 Agenda tu estudio</div>
+  <a href="https://wa.me/522218620111" class="wa-btn" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/></svg>
+  </a>
+</div>
+
+        <div class="orbit"></div>
+        <div class="nucleus"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VIDEO ══ -->
+<section class="video-section">
+  <div class="video-inner">
+    <div class="section-label">Míralo en acción</div>
+    <h2>El escaneo que <span>lee tus células</span> en <em>tiempo real</em></h2>
+    <div class="video-frame-wrap">
+      <!--
+        ════════════════════════════════════════════════════════════════
+        AQUÍ VA EL VIDEO: reemplaza el atributo "src" del iframe de abajo
+        con el enlace de inserción (embed) de tu video de YouTube o
+        Google Drive.
+
+        YouTube → usa el formato:
+          https://www.youtube.com/embed/ID_DEL_VIDEO
+
+        Google Drive → usa el formato:
+          https://drive.google.com/file/d/ID_DEL_ARCHIVO/preview
+        ════════════════════════════════════════════════════════════════
+    <div class="sym-card"><div class="sym-icon">❤️</div><div><h4>Cardiovascular</h4><p>Condición del corazón, pulso y circulación en tiempo real</p></div></div>
+    <div class="sym-card"><div class="sym-icon">🧠</div><div><h4>Cerebro vascular</h4><p>Actividad cerebral, presión y función neurológica</p></div></div>
+    <div class="sym-card"><div class="sym-icon">🦴</div><div><h4>Densidad ósea</h4><p>Salud de huesos, articulaciones y riesgo de osteoporosis</p></div></div>
+    <div class="sym-card"><div class="sym-icon">🫁</div><div><h4>Pulmones</h4><p>Vías respiratorias, función pulmonar y nefrología</p></div></div>
+    <div class="sym-card"><div class="sym-icon">🩸</div><div><h4>Azúcar & plomo</h4><p>Niveles de glucosa y metales pesados en sangre</p></div></div>
+    <div class="sym-card"><div class="sym-icon">🫀</div><div><h4>Hígado & vesícula</h4><p>Función hepática, digestión y salud gastrointestinal</p></div></div>
+    <div class="sym-card"><div class="sym-icon">🦷</div><div><h4>Tiroides & hormonas</h4><p>Equilibrio hormonal, tiroides y metabolismo</p></div></div>
+    <div class="sym-card"><div class="sym-icon">🔬</div><div><h4>Ginecología & próstata</h4><p>Salud reproductiva femenina y masculina</p></div></div>
+  </div>
+
+  <div class="scan-panel">
+    <h3>Sin agujas · Sin dolor · Sin espera</h3>
+    <p>El estudio tarda menos de 10 minutos. Solo colocas tu mano en el sensor y el analizador cuántico lee tu cuerpo con tecnología de resonancia magnética, generando un reporte completo de más de 18 sistemas.</p>
+    <div class="scan-features">
+      <span class="sf">⚡ No invasivo</span>
+      <span class="sf">🕐 10 minutos</span>
+      <span class="sf">📊 +18 sistemas</span>
+      <span class="sf">📋 Reporte impreso</span>
+      <span class="sf">🌿 100% seguro</span>
+    </div>
+    <div class="promo-tag">2 estudios por $350 MXN</div>
+    <div class="promo-note">Trae a quien más quieres — ambos estudios por el precio de uno</div>
+    <a href="https://wa.me/522218620111?text=Hola%20Alexa!%20Quiero%20agendar%20mi%20estudio%20cu%C3%A1ntico%202x1%20a%20%24350%20MXN%20%F0%9F%94%AC" class="btn-green" style="display:inline-flex;text-decoration:none;max-width:320px;margin:0 auto" target="_blank">
+      <svg class="wa-i" style="fill:#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    `Hola Alexa! 👋 Soy ${n}.
+
+Me registré en tu página para descargar la guía gratuita del Aceite de Coco.
+
+📱 Mi WhatsApp: ${w}
+📧 Email: ${em}
+
+🔬 Estudio cuántico: ${intTexto}
+
+¡Gracias! 🥥`
+  );
+  window.open(`https://wa.me/522218620111?text=${msg}`,'_blank');
+  document.getElementById('descargaForm').style.display='none';
+  document.getElementById('descargaOk').style.display='block';
+});
+
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:0.08});
+document.querySelectorAll('.sym-card,.ch-item,.cita-card,.ebook-features .ef').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(20px)';
+  el.style.transition='opacity .5s ease,transform .5s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
